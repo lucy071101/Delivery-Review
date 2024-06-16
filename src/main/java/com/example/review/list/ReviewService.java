@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @Service
 public class ReviewService {
@@ -26,5 +28,13 @@ public class ReviewService {
         else {
             throw new DataNotFoundException("review not found");
         }
+    }
+
+    public void create(String name, Integer rating) {
+        Review r = new Review();
+        r.setName(name);
+        r.setRating(rating);
+        r.setCreateDate(LocalDateTime.now());
+        this.reviewRepository.save(r);
     }
 }
